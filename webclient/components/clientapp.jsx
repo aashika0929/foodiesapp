@@ -45,8 +45,8 @@ class MainComponent extends React.Component {
     render() {
         return (
             <div>
-                <ChildComponent search={this.getResturantDataFromZomato.bind(this)}/>
-                <ChildComponent1 result={this.state.result}/>
+                <ChildComponent search = {this.getResturantDataFromZomato.bind(this)}/>
+                <ChildComponent1 result = {this.state.result}/>
             </div>
         );
     }

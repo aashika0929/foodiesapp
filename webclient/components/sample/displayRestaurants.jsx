@@ -1,5 +1,5 @@
 import React from 'react';
-var ButtonComponent = require('./button.jsx');
+let ButtonComponent = require('./button.jsx');
 import {Card, Icon, Image, Button, Input} from 'semantic-ui-react';
 let textBoxStyle = {
     height: '70px'
@@ -17,7 +17,6 @@ let inputStyle = {
 let cardStyle = {
     height: '150px'
 };
-
 class Index extends React.Component {
     constructor() {
         super();
@@ -25,7 +24,7 @@ class Index extends React.Component {
             comments: '',
             addButton: 'Add To Favourites',
             updateButton: 'Update',
-            colorName: 'green',
+            colorName: 'red',
             deleteButton: 'Delete'
         };
     }
@@ -34,24 +33,24 @@ class Index extends React.Component {
             url: '/Restaurant/add',
             type: 'POST',
             data: {
-                "name": this.props.name,
-                "address": this.props.address,
-                "cuisines": this.props.cuisines,
-                "ratings": this.props.ratings,
-                "img": this.props.img
+                'name': this.props.name,
+                'address': this.props.address,
+                'cuisines': this.props.cuisines,
+                'ratings': this.props.ratings,
+                'img': this.props.img
             },
             success: function(data) {
-                console.log(data);
+                // console.log(data);
                 this.setState({addButton: 'Added To Favourite'});
             }.bind(this),
             error: function(err) {
-                console.log('error occurred on AJAX');
-                console.log(err);
+                // console.log('error occurred on AJAX');
+                // console.log(err);
             }.bind(this)
         });
     }
     deleteFavourites() {
-        var id = this.props.id;
+        let id = this.props.id;
         $.ajax({
             url: `/Restaurant/delete/${id}`,
             type: 'DELETE',
@@ -66,8 +65,8 @@ class Index extends React.Component {
         });
     }
     updateFavourites() {
-        var comments = this.state.comments;
-        var id = this.props.id;
+        let comments = this.state.comments;
+        let id = this.props.id;
         $.ajax({
             url: `/Restaurant/update/${id}`,
             type: 'PATCH',
@@ -75,7 +74,7 @@ class Index extends React.Component {
                 'comments': comments
             },
             success: function(data) {
-                console.log("done");
+                console.log('done');
                 this.setState({updateButton: 'Updated'});
             }.bind(this),
             error: function(err) {
@@ -89,21 +88,21 @@ class Index extends React.Component {
         this.setState({comments: e.target.value});
     }
     render() {
-        var fav = this.props.fav;
-        var del = "";
-        var favourite = this.props.favourite;
-        var add = '';
-        var textBox = '';
-        if (fav == 'fav') {
-            add = <ButtonComponent click={this.addRestaurant.bind(this)} size='large' color={this.state.colorName || 'green'} name='heart' button={this.state.addButton}/>;
+        let fav = this.props.fav;
+        let del = "";
+        let favourite = this.props.favourite;
+        let add = '';
+        let textBox = '';
+        if (fav === 'fav') {
+            add = <ButtonComponent click={this.addRestaurant.bind(this)} size='large' color={this.state.colorName || 'red'} button={this.state.addButton}/>;
         }
-        if (favourite == 'favourites') {
+        if (favourite === 'favourites') {
             del = (
                 <div>
                     <Input fluid type='text' onChange={this.getComments.bind(this)} placeholder={this.props.comments} value={this.state.comments}/>
                     <div className='ui two buttons'>
-                        <ButtonComponent click={this.updateFavourites.bind(this)} size='small' color={this.state.updateColor || 'blue'} button={this.state.updateButton}/>
-                        <ButtonComponent click={this.deleteFavourites.bind(this)} size='small' color={this.state.deleteColor || 'white'} button={this.state.deleteButton}/>
+                        <ButtonComponent click={this.updateFavourites.bind(this)} size='small' color={this.state.updateColor || 'green'} button={this.state.updateButton}/>
+                        <ButtonComponent click={this.deleteFavourites.bind(this)} size='small' color={this.state.deleteColor || 'grey'} button={this.state.deleteButton}/>
                     </div>
                 </div>
             )
