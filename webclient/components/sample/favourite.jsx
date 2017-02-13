@@ -1,6 +1,7 @@
 import React from 'react';
 import {Card} from 'semantic-ui-react';
 import DisplayFavComponent from './displayFavourite.jsx';
+import $ from 'jquery';
 class Favourites extends React.Component {
     constructor() {
         super();
@@ -22,10 +23,32 @@ class Favourites extends React.Component {
             }.bind(this)
         });
     }
+    // onchange(){
+    //   this.componentWillMount();
+    // }
+    onchange(id) {
+        var arrObj = this.state.json;
+        var arr = [];
+        for (var obj of arrObj) {
+            if (obj._id != id) {
+                arr.push(obj);
+            }
+        }
+        this.setState({json: arr});
+    }
+    update(id,comments){
+      var arrObj = this.state.json;
+      for (var obj of arrObj) {
+          if (obj._id == id) {
+              obj.comments = comments;
+          }
+      }
+      this.setState({json: arrObj});
+    }
     render() {
         return (
             <div>
-                <DisplayFavComponent fav='favourites' json={this.state.json}/>
+                <DisplayFavComponent fav='favourites' json={this.state.json} change={this.onchange.bind(this)} update={this.update.bind(this)}/>
             </div>
         );
     }

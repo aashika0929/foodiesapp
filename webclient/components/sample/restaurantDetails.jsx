@@ -11,7 +11,7 @@ class Component2 extends React.Component {
             margin: 70
         };
         let restaurants = this.props.result.map(function(item) {
-            return (<Index img={item.restaurant.featured_image} name={item.restaurant.name} address={item.restaurant.location.address} cuisines={item.restaurant.cuisines} ratings={item.restaurant.user_rating.aggregate_rating} fav='fav'/>);
+            return (<Index resId={item.restaurant.id} img={item.restaurant.featured_image} name={item.restaurant.name} address={item.restaurant.location.address} cuisines={item.restaurant.cuisines} ratings={item.restaurant.user_rating.aggregate_rating} fav='fav'/>);
         });
         return (
             <div style={divStyle}>

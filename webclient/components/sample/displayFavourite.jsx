@@ -5,18 +5,27 @@ class DisplayFavComponent extends React.Component {
     constructor() {
         super();
     }
+
+    update(id,comments) {
+      this.props.update(id, comments);
+    }
+
     render() {
         let divStyle = {
             margin: 70
         };
+        var x = this.props.change;
+        var update = this.update.bind(this);
+        alert(x);
         let fav = this.props.fav;
         let JsonArray = this.props.json.map(function(item) {
             if (fav === 'favourites') {
-                return <CardsComponent name = {item.name} id = {item._id} img = {item.img} address = {item.address} cuisines = {item.cuisines} ratings = {item.ratings} comments = {item.comments} favourite = 'favourites'/>
+                alert("hello");
+                return <CardsComponent name={item.name} id={item._id} img={item.img} address={item.address} cuisines={item.cuisines} ratings={item.ratings} comments={item.comments} favourite='favourites' update={update} change={x}/>
             }
         });
         return (
-            <div style = {divStyle}>
+            <div style={divStyle}>
                 <Card.Group>{JsonArray}</Card.Group>
             </div>
         );

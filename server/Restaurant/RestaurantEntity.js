@@ -1,17 +1,37 @@
 const mongoose = require('mongoose');
+mongoose.promise = global.promise;
 
 const schema = new mongoose.Schema({
-    name: String,
-    address: String,
-    cuisines: String,
-    img: String,
-    ratings: Number,
+  resId: {
+       type: Number,
+       required: true,
+       trim: true,
+       unique: true
+   },
+    name:{
+      type:  String,
+      required: true
+    },
+    address: {
+      type:String,
+      unique:true
+    },
+    cuisines:{
+      type: String,
+      required: true
+    },
+    img: {
+      type: String,
+      unique: true
+    },
+    ratings:{
+      type: Number,
+      required: true
+    },
     comments: {
         type: String,
         default: 'Enter comments'
     }
 });
 const model = mongoose.model('Restaurant', schema);
-module.exports = {
-    RestaurantModel: model
-};
+module.exports = model;

@@ -23,7 +23,7 @@ class Index extends React.Component {
         this.state = {
             comments: '',
             addButton: 'Add To Favourites',
-            updateButton: 'Update',
+            updateButton: 'Update Comments',
             colorName: 'red',
             deleteButton: 'Delete'
         };
@@ -33,6 +33,7 @@ class Index extends React.Component {
             url: '/Restaurant/add',
             type: 'POST',
             data: {
+              'resId':this.props.resId,
                 'name': this.props.name,
                 'address': this.props.address,
                 'cuisines': this.props.cuisines,
@@ -41,7 +42,7 @@ class Index extends React.Component {
             },
             success: function(data) {
                 // console.log(data);
-                this.setState({addButton: 'Added To Favourite'});
+                this.setState({addButton: 'Added To Favourite',colorName:'white'});
             }.bind(this),
             error: function(err) {
                 // console.log('error occurred on AJAX');
@@ -55,15 +56,21 @@ class Index extends React.Component {
             url: `/Restaurant/delete/${id}`,
             type: 'DELETE',
             success: function(data) {
+
                 console.log(data);
-                this.setState({deleteButton: 'Deleted'});
+                this.props.change(id);
             }.bind(this),
             error: function(err) {
                 console.log('error occurred on AJAX');
                 console.log(err);
             }.bind(this)
         });
+
     }
+    // change(){
+    //
+    //   this.props.change;
+    // }
     updateFavourites() {
         let comments = this.state.comments;
         let id = this.props.id;
@@ -75,14 +82,21 @@ class Index extends React.Component {
             },
             success: function(data) {
                 console.log('done');
-                this.setState({updateButton: 'Updated'});
+                this.setState({updateButton: 'Comments Updated', colorName:'white'});
+                this.update(id,comments);
             }.bind(this),
             error: function(err) {
                 console.log('error occurred on AJAX');
                 console.log(err);
             }.bind(this)
         });
+        this.setState({comments:''});
     }
+
+    update(id,comments) {
+      this.props.update(id,comments).bind(this);
+    }
+
     getComments(e) {
         console.log(e.target.value);
         this.setState({comments: e.target.value});
@@ -101,8 +115,8 @@ class Index extends React.Component {
                 <div>
                     <Input fluid type='text' onChange={this.getComments.bind(this)} placeholder={this.props.comments} value={this.state.comments}/>
                     <div className='ui two buttons'>
-                        <ButtonComponent click={this.updateFavourites.bind(this)} size='small' color={this.state.updateColor || 'green'} button={this.state.updateButton}/>
-                        <ButtonComponent click={this.deleteFavourites.bind(this)} size='small' color={this.state.deleteColor || 'grey'} button={this.state.deleteButton}/>
+                        <ButtonComponent click={this.updateFavourites.bind(this)} size='medium' color={this.state.updateColor || 'teal'} button={this.state.updateButton}/>
+                        <ButtonComponent click={this.deleteFavourites.bind(this)} size='small' color={this.state.deleteColor || 'darkgrey'} button={this.state.deleteButton}/>
                     </div>
                 </div>
             )
