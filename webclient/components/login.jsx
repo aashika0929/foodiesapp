@@ -1,5 +1,17 @@
 var React = require('react');
 var {browserHistory} = require('react-router');
+import { Card, Icon, Image, Input, Button } from 'semantic-ui-react';
+
+var style1 = {
+ marginLeft: '38%',
+ marginTop: '10%'
+
+};
+var style2 = {
+ marginTop:'8%',
+ marginLeft:'4%',
+ color:'white'
+};
 
 class Login extends React.Component {
    constructor() {
@@ -39,17 +51,22 @@ $.ajax({
 
 }
 render(){
-  return(
-  <div className="Login">
-       <h2 className="text-center">Login</h2>
-       <div className="form-group">
-       <input className="form-control" onChange={this.handleUserName.bind(this)}  placeholder="Enter User Name"  type="text" />
-       </div>
-       <div className="form-group">
-       <input className="form-control" onChange={this.handlePassword.bind(this)}  placeholder="Enter Password"  type="password" />
-       </div>
-       <input className="btn btn-primary btn-block" onClick={this.LoginUser.bind(this)} type="submit" value="Login" />
-  </div>);
+  return(<div>
+
+    <Card style={style1}>
+
+       <Card.Content style={style2} >
+              <Input  onChange={this.handleUserName.bind(this)}  placeholder="Enter User Name"  type="text" autoFocus  />
+       </Card.Content>
+       <Card.Content style={style2}>
+              <Input onChange={this.handlePassword.bind(this)}  placeholder="Enter Password"  type="password" />
+       </Card.Content>
+       <Card.Content style={style2}>
+         <Button size='large' color='teal' onClick={this.LoginUser.bind(this)} >Login</Button>
+       </Card.Content>
+
+   </Card>
+ </div>);
 }
 }
 
