@@ -36,11 +36,12 @@ class Favourites extends React.Component {
         }
         this.setState({json: arr});
     }
-    update(id,comments){
+    update(id,comments,updateButton){
       var arrObj = this.state.json;
       for (var obj of arrObj) {
           if (obj._id == id) {
               obj.comments = comments;
+              obj.updateButton = updateButton;
           }
       }
       this.setState({json: arrObj});

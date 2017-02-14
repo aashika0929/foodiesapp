@@ -1,5 +1,4 @@
 var React = require('react');
-var home = require('./Home');
 var {browserHistory} = require('react-router');
 
 class Login extends React.Component {
