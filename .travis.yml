@@ -1,11 +1,13 @@
+dist: trusty
+sudo: false
 language: node_js
 node_js:
-  - "iojs"
-  - "7"
-install:
-  - npm install
-cache:
-  directories:
-    - "node_modules"
-  
+  - "6.9.1"
+addons:
+  sonarcloud:
+    organization: "aashika0929-github"
+    token:
+      secure: "eee09f0d99ba2977cee64f500d10173156e6ffd6"
+script:
+  - sonar-scanner
 
