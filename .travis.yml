@@ -2,3 +2,12 @@ language: node_js
 node_js:
   - "iojs"
   - "7"
+  
+ addons:
+  sonarcloud:
+    organization: "foodiesapp" # the key of the org you chose at step #3
+    token:
+      secure:3bf327635745915bf3fcc5e5bd779fa35a3cebad # encrypted value of your token
+script:
+  # other script steps might be done before running the actual analysis
+  - sonar-scanner
