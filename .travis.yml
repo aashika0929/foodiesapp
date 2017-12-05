@@ -10,4 +10,12 @@ addons:
       secure: "eee09f0d99ba2977cee64f500d10173156e6ffd6"
 script:
   - sonar-scanner
+  deploy:
+      - provider: codedeploy
+        revision_type: github
+        access_key_id: "AKIAJQ243V7UMRH36CDQ"
+        secret_access_key: "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"
+        application: "foodiesapp"
+        deployment_group: "My Deployment group"
+        region: "ap-south-1b"
 
